@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>OHS League</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="pl-theme">
+  <header>
+    <b>OHS <span>LEAGUE</span></b>
+    <nav class="top-nav">
+      <div class="nav-inner">
+        <a class="brand" href="#home"><span class="brand-mark">OHS</span><span>LEAGUE</span></a>
+        <button class="menu-toggle" id="menuToggle" aria-label="Open menu">☰</button>
+        <div class="nav-links" id="navLinks">
+          <a href="#home">Home</a>
+          <a href="#standings">Table</a>
+          <a href="#fixtures">Fixtures</a>
+          <a href="#results">Results</a>
+          <a href="#teams">Clubs</a>
+          <a href="#players">Players</a>
+          <a href="#trophies">Awards</a>
+          <a href="#news">News</a>
+          <a class="admin-link" href="#admin">Admin</a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <section id="home" class="hero-section">
+    <div class="hero-overlay">
+      <div class="hero-copy">
+        <span class="eyebrow">OFFICIAL OHS LEAGUE</span>
+        <h1>WHERE FOOTBALL<br><strong>MEETS PASSION.</strong></h1>
+        <p>Follow every fixture, result, club, player and award from one place.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#fixtures">View fixtures</a>
+          <a class="btn btn-ghost" href="#standings">League table</a>
+        </div>
+      </div>
+      <div class="hero-panel">
+        <span>SEASON</span>
+        <strong>2026</strong>
+        <small>LIVE LEAGUE COVERAGE</small>
+      </div>
+    </div>
+  </section>
+
+  <section id="standings">
+    <h2>Standings</h2>
+    <div class="card table">
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Team</th>
+            <th>P</th>
+            <th>W</th>
+            <th>D</th>
+            <th>L</th>
+            <th>GF</th>
+            <th>GA</th>
+            <th>GD</th>
+            <th>Pts</th>
+          </tr>
+        </thead>
+        <tbody id="standingsBody"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="fixtures">
+    <h2>Fixtures</h2>
+    <div id="fixturesGrid" class="grid"></div>
+  </section>
+
+  <section id="results">
+    <h2>Results</h2>
+    <div id="resultsGrid" class="grid"></div>
+  </section>
+
+  <section id="teams">
+    <h2>Teams</h2>
+    <div id="teamsGrid" class="grid"></div>
+  </section>
+
+  <section id="players">
+    <h2>Players</h2>
+    <div id="playersGrid" class="grid"></div>
+  </section>
+
+  <section id="trophies">
+    <h2>Trophies</h2>
+    <div id="trophiesGrid" class="grid"></div>
+  </section>
+
+  <section id="news">
+    <h2>Latest News</h2>
+    <div id="newsGrid" class="grid"></div>
+  </section>
+
+  <section id="admin">
+    <div id="loginPanel" class="card">
+      <h2>Secure Admin Login</h2>
+      <form id="loginForm">
+        <input id="adminEmail" type="email" placeholder="Admin email">
+        <input id="adminPassword" type="password" placeholder="Password" required>
+        <button type="submit" class="btn primary">Sign in</button>
+        <p id="msg"></p>
+      </form>
+    </div>
+
+    <div id="adminPanel" class="hidden">
+      <div class="card adminhead">
+        <div>
+          <h2>Admin Dashboard</h2>
+          <small id="who">Logged in as Admin</small>
+        </div>
+        <button id="logout" class="btn small">Sign out</button>
+      </div>
+
+      <div class="tabs">
+        <button data-tab="matchAdmin">Matches</button>
+        <button data-tab="teamAdmin">Teams</button>
+        <button data-tab="playerAdmin">Players</button>
+        <button data-tab="trophyAdmin">Trophies</button>
+        <button data-tab="newsAdmin">News</button>
+      </div>
+
+      <!-- Match Management Tab -->
+      <div id="matchAdmin" class="adminTab card">
+        <h3>Match Management</h3>
+        <form id="matchForm" class="form">
+          <input id="matchId" type="hidden">
+          
+          <label for="matchDate">Date</label>
+          <input id="matchDate" type="date" required>
+          
+          <label for="matchTime">Time</label>
+          <input id="matchTime" type="time">
+          
+          <label for="homeTeam">Home Team</label>
+          <select id="homeTeam" required></select>
+          
+          <label for="awayTeam">Away Team</label>
+          <select id="awayTeam" required></select>
+          
+          <label for="matchStatus">Status</label>
+          <select id="matchStatus">
+            <option value="Scheduled">Scheduled</option>
+            <option value="Played">Played</option>
+          </select>
+          
+          <label for="homeScore">Home Score</label>
+          <input id="homeScore" type="number" min="0" placeholder="Home score">
+          
+          <label for="awayScore">Away Score</label>
+          <input id="awayScore" type="number" min="0" placeholder="Away score">
+          
+          <!-- Dynamic Goal Events Section -->
+          <div class="form-group" style="margin: 15px 0;">
+            <label style="font-weight: bold; display: block; margin-bottom: 8px;">Match Goal Events</label>
+            <div id="goalEventsContainer"></div>
+            <button type="button" class="btn small" onclick="addGoalEventRow()">+ Add Goal Event</button>
+          </div>
+
+          <label for="matchVenue">Venue</label>
+          <input id="matchVenue" placeholder="Venue">
+          
+          <button type="submit" class="btn primary">Save Match</button>
+        </form>
+        <div id="matchList"></div>
+      </div>
+
+      <!-- Team Management Tab -->
+      <div id="teamAdmin" class="adminTab card hidden">
+        <h3>Team Management</h3>
+        <form id="teamForm" class="form">
+          <input id="teamId" type="hidden">
+          <input id="teamName" placeholder="Team name" required>
+          <input id="teamShort" placeholder="Short name">
+          <input id="teamCoach" placeholder="Coach">
+          <input id="teamLogo" type="file" accept="image/*">
+          <button type="submit" class="btn primary">Save Team</button>
+        </form>
+        <div id="teamList"></div>
+      </div>
+
+      <!-- Player Management Tab -->
+      <div id="playerAdmin" class="adminTab card hidden">
+        <h3>Player Management</h3>
+        <form id="playerForm" class="form">
+          <input id="playerId" type="hidden">
+          <input id="playerName" placeholder="Player name" required>
+          <select id="playerTeam" required></select>
+          <input id="position" placeholder="Position">
+          <input id="number" type="number" min="0" placeholder="Number">
+          <input id="playerImage" type="file" accept="image/*">
+          <button type="submit" class="btn primary">Save Player</button>
+        </form>
+        <div id="playerList"></div>
+      </div>
+
+      <!-- Trophy Management Tab -->
+      <div id="trophyAdmin" class="adminTab card hidden">
+        <h3>Trophy Management</h3>
+        <form id="trophyForm" class="form">
+          <input id="trophyId" type="hidden">
+          <input id="trophyName" placeholder="Trophy name" required>
+          <input id="winner" placeholder="Winner">
+          <input id="season" value="2026" placeholder="Season">
+          <input id="trophyImage" type="file" accept="image/*">
+          <button type="submit" class="btn primary">Save Trophy</button>
+        </form>
+        <div id="trophyList"></div>
+      </div>
+
+      <!-- News Management Tab -->
+      <div id="newsAdmin" class="adminTab card hidden">
+        <h3>News Management</h3>
+        <form id="newsForm" class="form">
+          <input id="newsId" type="hidden">
+          <input id="newsTitle" placeholder="Title" required>
+          <input id="newsDate" type="date" required>
+          <textarea id="body" placeholder="Story" required></textarea>
+          <input id="newsImage" type="file" accept="image/*">
+          <button type="submit" class="btn primary">Save News</button>
+        </form>
+        <div id="newsList"></div>
+      </div>
+    </div>
+  </section>
+
+  <footer>OHS League • Online database</footer>
+
+  <!-- Supabase JS Client -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <!-- Main Application Script -->
+  <script src="app_3.js"></script>
+</body>
+</html>

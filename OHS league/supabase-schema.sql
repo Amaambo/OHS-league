@@ -1,0 +1,45 @@
+create extension if not exists pgcrypto;
+create table if not exists public.admin_users(user_id uuid primary key references auth.users(id) on delete cascade);
+create table if not exists public.teams(id uuid primary key default gen_random_uuid(),name text unique not null,short_name text,coach text,logo_url text);
+create table if not exists public.players(id uuid primary key default gen_random_uuid(),name text not null,team_id uuid references public.teams(id) on delete cascade,position text,number integer,goals integer default 0,image_url text);
+create table if not exists public.matches(id uuid primary key default gen_random_uuid(),date date not null,time time,home_team_id uuid references public.teams(id),away_team_id uuid references public.teams(id),status text default 'scheduled',home_score integer,away_score integer,venue text,scorer_id uuid references public.players(id) on delete set null,assister_id uuid references public.players(id) on delete set null,check(home_team_id<>away_team_id));
+create table if not exists public.trophies(id uuid primary key default gen_random_uuid(),name text not null,winner text,season text,image_url text);
+create table if not exists public.news(id uuid primary key default gen_random_uuid(),title text not null,date date not null,body text not null,image_url text);
+create or replace function public.is_admin() returns boolean language sql stable security definer set search_path=public as $$select exists(select 1 from public.admin_users where user_id=auth.uid())$$;
+alter table public.admin_users enable row level security;
+alter table public.teams enable row level security;alter table public.players enable row level security;alter table public.matches enable row level security;alter table public.trophies enable row level security;alter table public.news enable row level security;
+grant select on public.teams,public.players,public.matches,public.trophies,public.news to anon,authenticated;
+grant insert,update,delete on public.teams,public.players,public.matches,public.trophies,public.news to authenticated;
+create policy "public teams" on public.teams for select using(true);
+create policy "public players" on public.players for select using(true);
+create policy "public matches" on public.matches for select using(true);
+create policy "public trophies" on public.trophies for select using(true);
+create policy "public news" on public.news for select using(true);
+create policy "admin teams insert" on public.teams for insert to authenticated with check(is_admin());
+create policy "admin teams update" on public.teams for update to authenticated using(is_admin()) with check(is_admin());
+create policy "admin teams delete" on public.teams for delete to authenticated using(is_admin());
+create policy "admin players insert" on public.players for insert to authenticated with check(is_admin());
+create policy "admin players update" on public.players for update to authenticated using(is_admin()) with check(is_admin());
+create policy "admin players delete" on public.players for delete to authenticated using(is_admin());
+create policy "admin matches insert" on public.matches for insert to authenticated with check(is_admin());
+create policy "admin matches update" on public.matches for update to authenticated using(is_admin()) with check(is_admin());
+create policy "admin matches delete" on public.matches for delete to authenticated using(is_admin());
+create policy "admin trophies insert" on public.trophies for insert to authenticated with check(is_admin());
+create policy "admin trophies update" on public.trophies for update to authenticated using(is_admin()) with check(is_admin());
+create policy "admin trophies delete" on public.trophies for delete to authenticated using(is_admin());
+create policy "admin news insert" on public.news for insert to authenticated with check(is_admin());
+create policy "admin news update" on public.news for update to authenticated using(is_admin()) with check(is_admin());
+create policy "admin news delete" on public.news for delete to authenticated using(is_admin());
+insert into storage.buckets(id,name,public) values('league-media','league-media',true) on conflict(id) do update set public=true;
+create policy "media public read" on storage.objects for select using(bucket_id='league-media');
+create policy "media admin upload" on storage.objects for insert to authenticated with check(bucket_id='league-media' and is_admin());
+create policy "media admin update" on storage.objects for update to authenticated using(bucket_id='league-media' and is_admin());
+create policy "media admin delete" on storage.objects for delete to authenticated using(bucket_id='league-media' and is_admin());
+-- After creating an Auth user, run:
+-- insert into public.admin_users(user_id) values('YOUR-AUTH-USER-UUID');
+-- Match event indexes
+create index if not exists matches_scorer_id_idx on public.matches(scorer_id);
+create index if not exists matches_assister_id_idx on public.matches(assister_id);
+
+revoke all on function public.is_admin() from public;
+grant execute on function public.is_admin() to anon,authenticated;

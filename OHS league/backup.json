@@ -1,0 +1,4 @@
+"events": [
+  { "type": "goal", "minute": 14, "scorerId": "p_12", "assisterId": "p_08" },
+  { "type": "goal", "minute": 88, "scorerId": "p_12", "assisterId": null }
+]

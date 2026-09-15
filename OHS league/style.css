@@ -1,0 +1,86 @@
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#070a0f;color:#f4f6f8;font-family:Arial,sans-serif}header{position:sticky;top:0;z-index:5;display:flex;justify-content:space-between;gap:20px;padding:16px 5%;background:#090c12ee;border-bottom:1px solid #27303c}header b{font-size:22px;letter-spacing:2px}header span,small{color:#d9b35f}nav{display:flex;gap:15px;flex-wrap:wrap}nav a{color:#b9c2cf;text-decoration:none;font-size:13px}.hero{padding:100px 8%;min-height:60vh;background:radial-gradient(circle at 75% 35%,#332914,#070a0f 48%)}h1{font-size:clamp(50px,8vw,90px);margin:8px 0}section{max-width:1400px;margin:auto;padding:60px 6%}h2{font-size:34px}.card,.grid article{background:#10151e;border:1px solid #27303c;border-radius:15px;padding:20px}.table{overflow:auto}table{width:100%;min-width:700px;border-collapse:collapse}th,td{text-align:left;padding:12px;border-bottom:1px solid #27303c}th{color:#d9b35f}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}.grid article img{width:100%;max-height:190px;object-fit:cover}.form{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.form textarea{grid-column:1/-1;min-height:130px}input,select,textarea,button{padding:11px;border-radius:9px;font:inherit}input,select,textarea{background:#0b0f15;color:white;border:1px solid #35404e}button{border:0;background:#d9b35f;color:#111;font-weight:800;cursor:pointer}.hidden{display:none!important}.adminhead{display:flex;justify-content:space-between}.tabs{display:flex;gap:8px;margin:18px 0;overflow:auto}.tabs button{background:#10151e;color:#c4ccd7;border:1px solid #35404e}.adminTab{margin-top:10px}.adminrow{display:flex;justify-content:space-between;gap:10px;padding:11px 0;border-bottom:1px solid #27303c}footer{text-align:center;padding:30px;color:#788292;border-top:1px solid #27303c}@media(max-width:800px){header{flex-direction:column;align-items:flex-start}.form{grid-template-columns:1fr}}
+
+/* ===== OHS LEAGUE — PREMIER-LEAGUE-INSPIRED REDESIGN ===== */
+:root{
+  --pl-purple:#4b087c;
+  --pl-purple-2:#6d12a8;
+  --pl-pink:#e9008c;
+  --pl-cyan:#00f0ff;
+  --pl-lime:#b7ff00;
+  --ink:#11131a;
+  --muted:#697080;
+  --paper:#f5f6f8;
+  --white:#ffffff;
+  --line:#e2e5ea;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body.pl-theme{margin:0;background:var(--paper);color:var(--ink);font-family:Arial,Helvetica,sans-serif}
+.top-nav{position:sticky;top:0;z-index:1000;background:linear-gradient(90deg,#3b0567,#5c0b91);box-shadow:0 5px 20px #0002}
+.nav-inner{max-width:1250px;margin:auto;min-height:72px;padding:0 22px;display:flex;align-items:center;gap:30px}
+.brand{display:flex;align-items:center;gap:9px;color:#fff!important;text-decoration:none;font-weight:900;letter-spacing:1.5px}
+.brand-mark{display:grid;place-items:center;width:42px;height:42px;border-radius:11px;background:var(--pl-lime);color:#260043;font-size:14px;transform:skew(-7deg)}
+.nav-links{display:flex;align-items:center;gap:5px;margin-left:auto}
+.nav-links a{color:#fff!important;text-decoration:none;font-weight:800;font-size:14px;padding:12px 13px;border-radius:7px}
+.nav-links a:hover{background:#ffffff18}
+.nav-links .admin-link{background:var(--pl-pink)}
+.menu-toggle{display:none;background:none;border:0;color:#fff;font-size:27px;margin-left:auto}
+.hero-section{min-height:560px;background:
+ radial-gradient(circle at 80% 30%,#d7008e66,transparent 28%),
+ linear-gradient(125deg,#28003f 0%,#4b087c 52%,#21002e 100%);
+ position:relative;overflow:hidden;color:#fff}
+.hero-section:after{content:"";position:absolute;inset:auto -5% -70px -5%;height:180px;background:var(--pl-lime);transform:skewY(-4deg)}
+.hero-overlay{max-width:1250px;margin:auto;min-height:560px;padding:90px 22px;display:flex;align-items:center;justify-content:space-between;gap:40px;position:relative;z-index:1}
+.hero-copy{max-width:730px}
+.eyebrow{font-size:13px;font-weight:900;letter-spacing:3px;color:var(--pl-lime)}
+.hero-copy h1{font-size:clamp(44px,7vw,86px);line-height:.91;margin:16px 0 25px;font-weight:950;letter-spacing:-4px}
+.hero-copy h1 strong{color:var(--pl-cyan)}
+.hero-copy p{font-size:18px;line-height:1.55;max-width:600px;color:#e7dff0}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+.btn{display:inline-flex;align-items:center;justify-content:center;border:0;border-radius:6px;padding:14px 22px;font-weight:900;text-transform:uppercase;text-decoration:none;cursor:pointer}
+.btn-primary{background:var(--pl-lime);color:#260043!important}
+.btn-ghost{border:1px solid #ffffff55;color:#fff!important;background:#fff1}
+.hero-panel{width:240px;padding:28px;border-radius:18px;background:#ffffff12;border:1px solid #ffffff2c;backdrop-filter:blur(10px);transform:rotate(3deg)}
+.hero-panel span,.hero-panel small{display:block;font-weight:800;letter-spacing:2px}
+.hero-panel strong{display:block;font-size:74px;line-height:1;margin:10px 0;color:var(--pl-lime)}
+main,section:not(.hero-section){scroll-margin-top:85px}
+section:not(.hero-section){max-width:1250px;margin:0 auto;padding:65px 22px}
+section:not(.hero-section)>h2{font-size:35px;margin:0 0 25px;letter-spacing:-1px}
+section:not(.hero-section)>h2:after{content:"";display:block;width:54px;height:5px;background:var(--pl-pink);margin-top:9px;border-radius:5px}
+#standings,#fixtures,#results,#teams,#players,#trophies,#news{background:var(--white);margin-top:18px;border-radius:18px}
+.card,.team-card,.player-card,.trophy-card,.news-card,.fixture-card,.result-card{background:#fff!important;border:1px solid var(--line)!important;border-radius:14px!important;box-shadow:0 8px 28px #2020300d!important;overflow:hidden}
+.card:hover,.team-card:hover,.player-card:hover,.trophy-card:hover,.news-card:hover{transform:translateY(-3px);box-shadow:0 14px 32px #20203018!important;transition:.2s}
+.grid,.cards-grid{gap:18px!important}
+button,.admin button{border-radius:6px!important;font-weight:900!important}
+table{width:100%;border-collapse:separate;border-spacing:0;overflow:hidden;border:1px solid var(--line);border-radius:12px;background:#fff}
+th{background:#3b0567!important;color:#fff!important;text-transform:uppercase;font-size:11px;letter-spacing:1px;padding:13px!important}
+td{padding:13px!important;border-bottom:1px solid #edf0f3!important;font-weight:700}
+tr:nth-child(even) td{background:#fafafa}
+tr:hover td{background:#f4f1f7}
+.admin-panel,.admin{background:#11131a!important;color:#fff!important;border-radius:16px;padding:24px!important}
+.admin input,.admin select,.admin textarea,.admin-panel input,.admin-panel select,.admin-panel textarea{background:#1c2029!important;color:#fff!important;border:1px solid #363c48!important;border-radius:7px!important;padding:11px!important}
+.admin label{font-weight:800;font-size:12px;text-transform:uppercase;letter-spacing:.5px}
+.admin h2,.admin-panel h2{color:#fff}
+.admin .btn-primary,.admin button[type=submit]{background:var(--pl-lime)!important;color:#24003d!important}
+.trophy-card{position:relative}
+.trophy-card:before{content:"";display:block;height:5px;background:linear-gradient(90deg,var(--pl-purple),var(--pl-pink),var(--pl-cyan))}
+footer{background:#230038!important;color:#dcd1e5!important;margin-top:30px}
+@media(max-width:800px){
+ .nav-inner{min-height:62px}
+ .menu-toggle{display:block}
+ .nav-links{display:none;position:absolute;top:62px;left:0;right:0;background:#3b0567;padding:10px 16px 16px;flex-direction:column;align-items:stretch;box-shadow:0 12px 25px #0003}
+ .nav-links.open{display:flex}
+ .nav-links a{padding:13px 14px}
+ .hero-overlay{padding:65px 20px 110px;min-height:530px}
+ .hero-panel{display:none}
+ .hero-copy h1{font-size:52px;letter-spacing:-2px}
+ section:not(.hero-section){padding:45px 15px}
+ #standings,#fixtures,#results,#teams,#players,#trophies,#news{border-radius:12px}
+}
+@media(max-width:520px){
+ .hero-copy h1{font-size:43px}
+ .hero-copy p{font-size:16px}
+ .hero-actions .btn{width:100%}
+ table{font-size:12px}
+ td,th{padding:9px!important}
+}
